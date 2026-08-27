@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
    <head>
       <meta charset="utf-8">
@@ -21,6 +21,7 @@
           position:fixed; inset:0; z-index:9999; display:none;
           align-items:center; justify-content:center;
           background:rgba(0,0,0,0.6); color:#fff; font-size:2rem; pointer-events:none;
+          -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
         }
       </style>
    </head>
@@ -118,6 +119,15 @@
       <script src="core_list.js"></script>
       <script src="libretro.js"></script>
       <script>
+        // Request real browser fullscreen (hides address bar/chrome) on any tap.
+        function _requestFullscreen() {
+          var el = document.documentElement;
+          if (el.requestFullscreen) el.requestFullscreen().catch(function(){});
+          else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+        }
+        document.addEventListener('touchend', _requestFullscreen, { once: false });
+        document.addEventListener('click', _requestFullscreen, { once: false });
+
         var _canvas = document.getElementById('canvas');
         function _fitCanvas() {
           _canvas.style.display = 'block';
