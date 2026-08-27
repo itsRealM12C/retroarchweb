@@ -1,0 +1,2 @@
+gambatte_libretro.js
+fceumm_libretro.js
